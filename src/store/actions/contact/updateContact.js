@@ -1,5 +1,5 @@
 import { showError, showSuccess } from '../../../plugins';
-import { updateContact } from '../../../services/api/contact';
+import { updateContactApi } from '../../../services/api/contact';
 import { UPDATE_CONTACT_SUCCESS, UPDATE_CONTACT_FAILED } from '../../types';
 import { setLoading } from '../common';
 import { getDetailDetailContact } from './getDetailContact';
@@ -15,7 +15,7 @@ export const failedUpdateContact = () => ({
 
 export const upDataProduct = (id, payload, navigation) => async dispatch => {
   dispatch(setLoading(true));
-  await updateContact(id, payload)
+  await updateContactApi(id, payload)
     .then(res => {
       dispatch(successUpdateContact(res.data));
       dispatch(setLoading(false));

@@ -1,4 +1,4 @@
-import { deleteContact } from "../../../services/api/contact";
+import { deleteContactApi } from "../../../services/api/contact";
 import { showError, showSuccess } from "../../../plugins";
 import { setLoading } from "../common";
 import {
@@ -18,7 +18,7 @@ export const deleteContactFailed = (error) => ({
 
 export const deleteContact = (id, navigation) => async (dispatch) => {
   dispatch(setLoading(true));
-  await deleteContact(id).then((response) => {
+  await deleteContactApi(id).then((response) => {
     dispatch(deleteContactSuccess(response.data));
     showSuccess('Home');
     dispatch(setLoading(false));

@@ -1,5 +1,5 @@
 import { showError } from "../../../plugins";
-import { getContact } from "../../../services/api/contact";
+import { getContactApi } from "../../../services/api/contact";
 import {
 	GET_CONTACT_SUCCESS,
 	GET_CONTACT_FAILED,
@@ -11,10 +11,10 @@ export const setContactSuccess = data => ({
 	payload: data,
 });
 
-export const setContactLoading = loading => ({
-	type: CONTACT_LOADING,
-	payload: loading
-})
+// export const setContactLoading = loading => ({
+// 	type: CONTACT_LOADING,
+// 	payload: loading
+// })
 
 export const setContactFailed = error => ({
 	type: GET_CONTACT_FAILED,
@@ -22,15 +22,15 @@ export const setContactFailed = error => ({
 });
 
 export const getContact = () => async dispatch => {
-	dispatch(setContactLoading(true));
-	await getContact()
+	// dispatch(setContactLoading(true));
+	await getContactApi()
 		.then(res => {
-			dispatch(setContactSuccess(res.data));
-			dispatch(setContactLoading(false));
+			dispatch(setContactSuccess(res));
+			// dispatch(setContactLoading(false));
 		})
 		.catch(err => {
 			dispatch(setContactFailed(err.response.message));
-			dispatch(setContactLoading(false));
+			// dispatch(setContactLoading(false));
 			showError(err.response.message);
 		});
 };

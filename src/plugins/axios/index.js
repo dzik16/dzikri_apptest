@@ -1,19 +1,19 @@
 import axios from 'axios';
 import config from '../../config';
-import {Store} from '../../store';
+import { Store } from '../../store';
 
-const stores = Store.getState();
+// const stores = Store.getState();
 
-const token = stores.loginReducer.userData.access_token
-  ? stores.loginReducer.userData.access_token
-  : undefined;
+// const token = stores.loginReducer.userData.access_token
+//   ? stores.loginReducer.userData.access_token
+//   : undefined;
 
 const instance = axios.create({
   baseURL: config.backendApi,
   timeout: 1000,
-  headers: {
-    access_token: token,
-  },
+  // headers: {
+  //   access_token: token,
+  // },
 });
 
 // Add a request interceptor

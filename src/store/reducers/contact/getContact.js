@@ -7,7 +7,6 @@ import {
 const initialState = {
 	isLoading: false,
 	isError: false,
-	errorMessage: '',
 	data: [],
 };
 

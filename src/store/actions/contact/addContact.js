@@ -1,5 +1,5 @@
 import { showError, showSuccess } from '../../../plugins';
-import { addContact } from '../../../services/api/contact';
+import { addContactApi } from '../../../services/api/contact';
 import { ADD_CONTACT_SUCCESS, ADD_CONTACT_FAILED } from '../../types';
 import { setLoading } from '../common';
 
@@ -15,7 +15,7 @@ export const setAddContactFailed = () => ({
 export const addContact = (payload, navigation) => async dispatch => {
   dispatch(setLoading(true));
   console.log('Kirim Data Contact', payload);
-  await addContact(payload)
+  await addContactApi(payload)
     .then(res => {
       dispatch(setAddContactSuccess(res.data));
       dispatch(setLoading(false));
