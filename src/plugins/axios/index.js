@@ -11,9 +11,10 @@ import { Store } from '../../store';
 const instance = axios.create({
   baseURL: config.backendApi,
   timeout: 1000,
-  // headers: {
-  //   access_token: token,
-  // },
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'multipart/form-data',
+  },
 });
 
 // Add a request interceptor
@@ -31,7 +32,6 @@ instance.interceptors.response.use(
   response => response,
   error => {
     // Do something with response error
-
     return Promise.reject(error);
   },
 );

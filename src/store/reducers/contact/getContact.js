@@ -7,7 +7,7 @@ import {
 const initialState = {
 	isLoading: false,
 	isError: false,
-	data: [],
+	dataContact: [],
 };
 
 export const getContactReducers = (state = initialState, action) => {
@@ -22,7 +22,7 @@ export const getContactReducers = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				isError: false,
-				data: action.payload,
+				dataContact: action.payload,
 			};
 		case GET_CONTACT_FAILED:
 			return {

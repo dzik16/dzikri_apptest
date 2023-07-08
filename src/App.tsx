@@ -3,15 +3,20 @@ import React from 'react';
 import FlashMessage from 'react-native-flash-message';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import Router from './navigation';
 import { Persistore, Store } from './store';
+import { StatusBar } from 'react-native';
+import { COLORS } from './themes';
+import Navigation from './navigation';
 
 const MainApp = () => {
   return (
-    <NavigationContainer>
-      <Router />
+    <>
+      <StatusBar
+        backgroundColor={COLORS.primary}
+        barStyle="default" />
+      <Navigation />
       <FlashMessage position="top" />
-    </NavigationContainer>
+    </>
   );
 };
 

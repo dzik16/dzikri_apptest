@@ -1,8 +1,8 @@
 import { UPDATE_CONTACT_SUCCESS, UPDATE_CONTACT_FAILED } from "../../types";
 
 const initialState = {
-  isLoading: true,
-  data: {},
+  // isLoading: true,
+  dataUpdateContact: {},
 };
 
 export const updateContactReducers = (state = initialState, action = {}) => {
@@ -10,7 +10,7 @@ export const updateContactReducers = (state = initialState, action = {}) => {
     case UPDATE_CONTACT_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        dataUpdateContact: action.payload,
       };
 
     case UPDATE_CONTACT_FAILED:

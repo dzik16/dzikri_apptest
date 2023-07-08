@@ -4,7 +4,7 @@ import {
 } from "../../types";
 
 const initialState = {
-  data: {},
+  dataDeleteContact: {},
   isError: null,
 };
 
@@ -14,7 +14,7 @@ export const deleteContactReducers = (state = initialState, action) => {
       return {
         ...state,
         isError: null,
-        data: action.payload,
+        dataDeleteContact: action.payload,
       };
 
     case DELETE_CONTACT_FAILED:

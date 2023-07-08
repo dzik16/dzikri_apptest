@@ -13,19 +13,19 @@ export const failedUpdateContact = () => ({
   type: UPDATE_CONTACT_FAILED,
 });
 
-export const upDataProduct = (id, payload, navigation) => async dispatch => {
-  dispatch(setLoading(true));
+export const updateContact = (id, payload) => async dispatch => {
+  // dispatch(setLoading(true));
   await updateContactApi(id, payload)
     .then(res => {
-      dispatch(successUpdateContact(res.data));
-      dispatch(setLoading(false));
+      dispatch(successUpdateContact(res));
+      // dispatch(setLoading(false));
       dispatch(getDetailDetailContact(id));
-      navigation.goBack();
+      // navigation.goBack();
       showSuccess('Update Contact Success');
     })
     .catch(err => {
       dispatch(failedUpdateContact());
-      dispatch(setLoading(false));
-      showError(err.response.message);
+      // dispatch(setLoading(false));
+      showError("Update Contact Error");
     });
 };

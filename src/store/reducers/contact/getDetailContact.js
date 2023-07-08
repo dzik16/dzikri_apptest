@@ -8,7 +8,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   errorMessage: '',
-  data: {},
+  dataDetailContact: {},
 };
 
 export const getDetailContactReducers = (state = initialState, action) => {
@@ -23,7 +23,7 @@ export const getDetailContactReducers = (state = initialState, action) => {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload,
+        dataDetailContact: action.payload,
       };
     case GET_DETAIL_CONTACT_FAILED:
       return {

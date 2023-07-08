@@ -22,10 +22,11 @@ export const setDetailContactFailed = error => ({
 });
 
 export const getDetailDetailContact = (id) => async dispatch => {
-  dispatch(setDetailContactLoading(true));
-  await getDetailContactApi('93ad6070-c92b-11e8-b02f-cbfa15db428b')
+  // dispatch(setDetailContactLoading(true));
+  await getDetailContactApi(id)
     .then(res => {
       dispatch(setDetailContactSuccess(res.data));
+      console.log("jjjjjj", res.data);
       dispatch(setDetailContactLoading(false));
     })
     .catch(err => {

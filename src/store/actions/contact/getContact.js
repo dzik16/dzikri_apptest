@@ -25,12 +25,13 @@ export const getContact = () => async dispatch => {
 	// dispatch(setContactLoading(true));
 	await getContactApi()
 		.then(res => {
-			dispatch(setContactSuccess(res));
+			dispatch(setContactSuccess(res.data));
+			// console.log("haha", res.data);
 			// dispatch(setContactLoading(false));
 		})
 		.catch(err => {
 			dispatch(setContactFailed(err.response.message));
 			// dispatch(setContactLoading(false));
-			showError(err.response.message);
+			showError("err.response.message");
 		});
 };
