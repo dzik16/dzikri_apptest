@@ -10,6 +10,7 @@ import {getDetailDetailContact} from '../../store/actions/contact';
 const Details = ({navigation, route}) => {
   const {id} = route.params;
   const dispatch = useDispatch();
+  const {isLoading} = useSelector(state => state.commonReducers);
   const {dataDetailContact} = useSelector(
     state => state.getDetailContactReducers,
   );
@@ -38,7 +39,6 @@ const Details = ({navigation, route}) => {
           }}>
           <View
             style={{
-              // flex: 1,
               alignItems: 'center',
             }}>
             <Image
@@ -56,13 +56,16 @@ const Details = ({navigation, route}) => {
 
           <CustomText
             label="Firstname"
-            value={dataDetailContact.data.firstName}
+            value={!isLoading ? dataDetailContact.data.firstName : ''}
           />
           <CustomText
             label="Lastname"
-            value={dataDetailContact.data.lastName}
+            value={!isLoading ? dataDetailContact.data.lastName : ''}
           />
-          <CustomText label="Age" value={dataDetailContact.data.age} />
+          <CustomText
+            label="Age"
+            value={!isLoading ? dataDetailContact.data.age : ''}
+          />
         </View>
       </View>
     </>

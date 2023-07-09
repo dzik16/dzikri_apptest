@@ -43,21 +43,12 @@ const AddContact = ({navigation}) => {
   return (
     <>
       <BackTitle title="Create Contact" onPress={() => navigation.goBack()} />
-      {/* <BottomUpload
-        image={image}
-        setAvatar={setAvatar}
-        thisRef={thisRef}
-        anim={anim}
-        deskripsi="Choose your image product"
-      /> */}
-      {/* <Animated.View
-        style={{opacity: Animated.add(0.1, Animated.multiply(anim, 1.0))}}> */}
       <Formik
         initialValues={{
           firstName: '',
           lastName: '',
           age: '',
-          // photo: '',
+          photo: '',
         }}
         validationSchema={formProductSchema}
         onSubmit={values => onPressTerbit(values)}>
@@ -138,7 +129,6 @@ const AddContact = ({navigation}) => {
           </>
         )}
       </Formik>
-      {/* </Animated.View> */}
     </>
   );
 };

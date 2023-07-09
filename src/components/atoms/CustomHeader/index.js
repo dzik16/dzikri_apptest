@@ -3,16 +3,8 @@ import React from 'react';
 import styles from './style';
 import BackTitle from './BackTitle';
 import Title from './Title';
-import BackHeader from './BackHeader';
-import BackHeaderLove from './BackLoveHeader';
 
-function CustomHeader({ title, onPress, type, isLoved, presLoved }) {
-  if (type === 'BackHeader') {
-    return <BackHeader onPress={onPress} />;
-  }
-  if (type === 'BackHeaderLove') {
-    return <BackHeaderLove onPress={onPress} isLoved={isLoved} pressLoved={presLoved} />;
-  }
+function CustomHeader({ title, onPress, type }) {
   if (type === 'BackTitle') {
     return <BackTitle title={title} onPress={onPress} />;
   }

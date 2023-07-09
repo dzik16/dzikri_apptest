@@ -9,7 +9,6 @@ import styles from './styles';
 import Upload from '../../components/molekules/UploadFoto';
 import {useDispatch, useSelector} from 'react-redux';
 import {
-  addContact,
   getDetailDetailContact,
   updateContact,
 } from '../../store/actions/contact';
@@ -61,15 +60,6 @@ const UpdateContact = ({navigation, route}) => {
         title="Update Contact"
         onPress={() => navigation.replace('HomeScreen')}
       />
-      {/* <BottomUpload
-        image={image}
-        setAvatar={setAvatar}
-        thisRef={thisRef}
-        anim={anim}
-        deskripsi="Choose your image product"
-      /> */}
-      {/* <Animated.View
-        style={{opacity: Animated.add(0.1, Animated.multiply(anim, 1.0))}}> */}
       <Formik
         initialValues={{
           firstName: dataDetailContact.data.firstName,
@@ -156,7 +146,6 @@ const UpdateContact = ({navigation, route}) => {
           </>
         )}
       </Formik>
-      {/* </Animated.View> */}
     </>
   );
 };
