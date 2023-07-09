@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Create, Home, Splash, Details } from '../screens';
+import { Create, Home, Splash, Details, Update } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,7 +33,11 @@ export default function Router() {
         component={Details}
         options={{ headerShown: false }}
       />
-
+      <Stack.Screen
+        name='UpdateContactScreen'
+        component={Update}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   )
 }

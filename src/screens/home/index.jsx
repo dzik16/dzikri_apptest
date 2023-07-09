@@ -1,9 +1,20 @@
-import {FlatList, RefreshControl} from 'react-native';
+import {
+  FlatList,
+  Modal,
+  RefreshControl,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getContact} from '../../store/actions/contact';
+import {deleteContact, getContact} from '../../store/actions/contact';
 import {CustomHeader} from '../../components/atoms';
-import {CardFoto, EmptyState} from '../../components/molekules';
+import {
+  CardFoto,
+  EmptyState,
+  ModalConfirmation,
+} from '../../components/molekules';
 import styles from './style';
 import {EmptySearch} from '../../assets/image';
 
@@ -13,9 +24,25 @@ const Home = ({navigation}) => {
   const {dataContact, isLoading} = useSelector(
     state => state.getContactReducers,
   );
-  const {dataDeleteContact} = useSelector(state => state.deleteContactReducers);
   const [onFocused, setOnFocused] = useState();
   const [refreshing, setRefreshing] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [id, setId] = useState('');
+
+  const handleDelete = () => {
+    console.log('idddd :', id);
+    // if (id) {
+    dispatch(deleteContact(id));
+    setModalVisible(false);
+    setRefreshing(true);
+    setRefreshing(false);
+    // }
+  };
+
+  const handleCancel = () => {
+    setModalVisible(false);
+  };
 
   useEffect(() => {
     dispatch(getContact());
@@ -34,6 +61,14 @@ const Home = ({navigation}) => {
         onPressDetails={() =>
           navigation.navigate('DetailScreen', {id: item.id})
         }
+        onPressEdit={() =>
+          navigation.navigate('UpdateContactScreen', {id: item.id})
+        }
+        onPressDelete={() => {
+          setModalVisible(true);
+          setFirstName(item.firstName);
+          setId(item.id);
+        }}
         source={{
           uri:
             item.photo !== 'N/A'
@@ -63,6 +98,12 @@ const Home = ({navigation}) => {
         type="HeaderTitle"
         title="My Contact"
         onPress={() => navigation.navigate('CreateContactScreen')}
+      />
+      <ModalConfirmation
+        isVisible={isModalVisible}
+        onConfirmation={handleDelete}
+        onCancel={handleCancel}
+        title={`Are you sure you want to delete ${firstName} ?`}
       />
       <FlatList
         showsVerticalScrollIndicator={false}
