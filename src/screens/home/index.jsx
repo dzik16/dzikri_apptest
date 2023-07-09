@@ -20,9 +20,6 @@ const Home = ({navigation}) => {
   const {dataContact, isLoading} = useSelector(
     state => state.getContactReducers,
   );
-  const {dataDetailContact} = useSelector(
-    state => state.getDetailContactReducers,
-  );
   const {dataDeleteContact} = useSelector(state => state.deleteContactReducers);
   const [onFocused, setOnFocused] = useState();
   const [refreshing, setRefreshing] = useState(false);
@@ -54,7 +51,9 @@ const Home = ({navigation}) => {
         onPressCard={() => {
           onFocused === item.id ? setOnFocused('') : setOnFocused(item.id);
         }}
-        onPressDetails={() => navigation.navigate('DetailScreen')}
+        onPressDetails={() =>
+          navigation.navigate('DetailScreen', {id: item.id})
+        }
         source={{
           uri:
             item.photo !== 'N/A'
