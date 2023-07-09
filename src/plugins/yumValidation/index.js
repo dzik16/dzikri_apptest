@@ -7,6 +7,4 @@ export const formProductSchema = Yup.object().shape({
     .required('Silahkan masukan lastname'),
   age: Yup.number()
     .required('Silahkan masukan age'),
-  // photo: Yup.string()
-  //   .required('Silahkan masukan photo'),
 })

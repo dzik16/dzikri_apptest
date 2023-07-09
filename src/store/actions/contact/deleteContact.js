@@ -5,6 +5,7 @@ import {
   DELETE_CONTACT_SUCCESS,
   DELETE_CONTACT_FAILED
 } from "../../types";
+import { getContact } from "./getContact";
 
 export const deleteContactSuccess = (data) => ({
   type: DELETE_CONTACT_SUCCESS,
@@ -21,11 +22,12 @@ export const deleteContact = (id) => async (dispatch) => {
   try {
     const ress = await deleteContactApi(id)
     dispatch(deleteContactSuccess(response.data));
+    dispatch(getContact)
     dispatch(setLoading(false));
     showSuccess('Delete Success');
   } catch (err) {
     dispatch(deleteContactFailed(err.message));
     dispatch(setLoading(false));
-    showError("Delete failed");
+    showError("Delete Contact failed");
   }
 };

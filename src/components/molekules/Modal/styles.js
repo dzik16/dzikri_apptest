@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { COLORS } from '../../../themes';
+import { COLORS, SIZES } from '../../../themes';
 
 export default StyleSheet.create({
   modalContainer: {
@@ -25,16 +25,24 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-  button: {
+  buttonConfrmation: {
     flex: 1,
     marginHorizontal: 10,
     padding: 10,
-    backgroundColor: '#DDDDDD',
+    backgroundColor: COLORS.primary,
+    borderRadius: 4,
+    alignItems: 'center',
+  },
+  buttonCancel: {
+    flex: 1,
+    marginHorizontal: 10,
+    padding: 10,
+    backgroundColor: COLORS.danger,
     borderRadius: 4,
     alignItems: 'center',
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: SIZES.h4,
     fontWeight: 'bold',
   },
 });

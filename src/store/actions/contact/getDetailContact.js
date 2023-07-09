@@ -25,6 +25,5 @@ export const getDetailDetailContact = (id) => async dispatch => {
   } catch (err) {
     dispatch(setDetailContactFailed(err.message));
     dispatch(setLoading(false))
-    showError("Get Detail Failed");
   }
 };

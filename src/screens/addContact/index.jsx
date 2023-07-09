@@ -22,9 +22,8 @@ const AddContact = ({navigation}) => {
       formData.append('firstName', value.firstName);
       formData.append('lastName', value.lastName);
       formData.append('age', value.age);
-      formData.append('photo', image);
+      formData.append('photo', image === '-' ? 'N/A' : image);
       dispatch(addContact(formData, navigation));
-      console.log(image);
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +47,6 @@ const AddContact = ({navigation}) => {
           firstName: '',
           lastName: '',
           age: '',
-          photo: '',
         }}
         validationSchema={formProductSchema}
         onSubmit={values => onPressTerbit(values)}>

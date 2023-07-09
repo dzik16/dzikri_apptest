@@ -4,10 +4,6 @@ import config from '../../config';
 const instance = axios.create({
   baseURL: config.backendApi,
   timeout: 1000,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'multipart/form-data',
-  },
 });
 
 // Add a request interceptor

@@ -8,10 +8,10 @@ function ConfirmationModal({ isVisible, onConfirmation, onCancel, title }) {
         <View style={styles.modalContent}>
           <Text style={styles.modalText}>{title}</Text>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={onConfirmation} style={styles.button}>
+            <TouchableOpacity onPress={onConfirmation} style={styles.buttonConfrmation}>
               <Text style={styles.buttonText}>Yes</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={onCancel} style={styles.button}>
+            <TouchableOpacity onPress={onCancel} style={styles.buttonCancel}>
               <Text style={styles.buttonText}>No</Text>
             </TouchableOpacity>
           </View>

@@ -1,4 +1,4 @@
-import { showError, showSuccess } from '../../../plugins';
+import { showSuccess } from '../../../plugins';
 import { addContactApi } from '../../../services/api/contact';
 import { ADD_CONTACT_SUCCESS, ADD_CONTACT_FAILED } from '../../types';
 import { setLoading } from '../common';
@@ -13,7 +13,6 @@ export const setAddContactFailed = () => ({
 });
 
 export const addContact = (payload, navigation) => async dispatch => {
-  console.log('Kirim Data Contact', payload);
   dispatch(setLoading(true));
   try {
     const res = await addContactApi(payload)
@@ -26,6 +25,5 @@ export const addContact = (payload, navigation) => async dispatch => {
     dispatch(setAddContactFailed());
     dispatch(setLoading(false));
     navigation.replace("HomeScreen");
-    console.error("Create Contact Failed");
   }
 };

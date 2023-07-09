@@ -29,6 +29,15 @@ const UpdateContact = ({navigation, route}) => {
     dispatch(getDetailDetailContact(id));
   }, [dispatch]);
 
+  const initialValuess = {
+    firstName: !isLoading ? dataDetailContact.data.firstName : '',
+    lastName: !isLoading ? dataDetailContact.data.lastName : '',
+    age: !isLoading ? dataDetailContact.data.age.toString() : '',
+    photo: !isLoading ? dataDetailContact.data.photo : '-',
+  };
+
+  console.log('valueee : ', dataDetailContact);
+
   const onPressTerbit = value => {
     try {
       const formData = new FormData();
@@ -51,22 +60,13 @@ const UpdateContact = ({navigation, route}) => {
       compressImageQuality: 0.7,
     }).then(image => {
       setAvatar(image.path);
-      thisRef.current.snapTo(1);
     });
 
   return (
     <>
-      <BackTitle
-        title="Update Contact"
-        onPress={() => navigation.replace('HomeScreen')}
-      />
+      <BackTitle title="Update Contact" onPress={() => navigation.goBack()} />
       <Formik
-        initialValues={{
-          firstName: dataDetailContact.data.firstName,
-          lastName: dataDetailContact.data.lastName,
-          age: dataDetailContact.data.age.toString(),
-          photo: dataDetailContact.data.photo,
-        }}
+        initialValues={initialValuess}
         validationSchema={formProductSchema}
         onSubmit={values => onPressTerbit(values)}>
         {({

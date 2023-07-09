@@ -1,4 +1,3 @@
-import { showError } from "../../../plugins";
 import { getContactApi } from "../../../services/api/contact";
 import {
   GET_CONTACT_SUCCESS,
@@ -25,6 +24,5 @@ export const getContact = () => async dispatch => {
   } catch (err) {
     dispatch(setContactFailed(err.message));
     dispatch(setLoading(false));
-    showError("Get Contact Failed");
   }
 };
