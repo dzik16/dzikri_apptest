@@ -13,6 +13,7 @@ import {
   getDetailDetailContact,
   updateContact,
 } from '../../store/actions/contact';
+import ImagePicker from 'react-native-image-crop-picker';
 
 const UpdateContact = ({navigation, route}) => {
   const {id} = route.params;
@@ -24,7 +25,6 @@ const UpdateContact = ({navigation, route}) => {
   const [image, setAvatar] = useState(
     dataDetailContact.data.photo !== 'N/A' ? dataDetailContact.data.photo : '-',
   );
-  const [data, setData] = useState();
 
   useEffect(() => {
     dispatch(getDetailDetailContact(id));
@@ -37,16 +37,30 @@ const UpdateContact = ({navigation, route}) => {
       formData.append('lastName', value.lastName);
       formData.append('age', value.age);
       formData.append('photo', image);
-      setData(formData);
+      console.log('haha : ', value);
       dispatch(updateContact(id, formData, navigation));
     } catch (error) {
       showError('Update Contact Gagal');
     }
   };
 
+  const fromLibrary = () =>
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+      compressImageQuality: 0.7,
+    }).then(image => {
+      setAvatar(image.path);
+      thisRef.current.snapTo(1);
+    });
+
   return (
     <>
-      <BackTitle title="Update Contact" onPress={() => navigation.goBack()} />
+      <BackTitle
+        title="Update Contact"
+        onPress={() => navigation.replace('HomeScreen')}
+      />
       {/* <BottomUpload
         image={image}
         setAvatar={setAvatar}
@@ -90,7 +104,7 @@ const UpdateContact = ({navigation, route}) => {
                   <Upload
                     style={{marginTop: 10}}
                     source={image}
-                    onPress={() => thisRef.current.snapTo(0)}
+                    onPress={fromLibrary}
                     name="camera"
                   />
                 </View>

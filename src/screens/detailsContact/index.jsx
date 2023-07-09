@@ -20,7 +20,10 @@ const Details = ({navigation, route}) => {
 
   return (
     <>
-      <BackTitle title="Detail Contact" onPress={() => navigation.goBack()} />
+      <BackTitle
+        title="Detail Contact"
+        onPress={() => navigation.replace('HomeScreen')}
+      />
       <View
         style={{
           marginVertical: 10,

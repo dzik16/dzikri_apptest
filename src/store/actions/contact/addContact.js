@@ -20,12 +20,12 @@ export const addContact = (payload, navigation) => async dispatch => {
     dispatch(setAddContactSuccess(res.data));
     dispatch(setLoading(false));
     showSuccess('Tambah Contact Success');
-    navigation.goBack();
+    navigation.replace("HomeScreen");
     console.log('ADD CONTACT', res);
   } catch (err) {
     dispatch(setAddContactFailed());
     dispatch(setLoading(false));
-    navigation.goBack();
-    showError("Create Contact Failed");
+    navigation.replace("HomeScreen");
+    console.error("Create Contact Failed");
   }
 };

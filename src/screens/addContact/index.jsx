@@ -9,12 +9,12 @@ import styles from './styles';
 import Upload from '../../components/molekules/UploadFoto';
 import {useDispatch, useSelector} from 'react-redux';
 import {addContact} from '../../store/actions/contact';
+import ImagePicker from 'react-native-image-crop-picker';
 
-const AddContact = ({navigation, route}) => {
+const AddContact = ({navigation}) => {
   const dispatch = useDispatch();
-  const {dataAddContact} = useSelector(state => state.addContactReducers);
   const [image, setAvatar] = useState('-');
-  const [data, setData] = useState();
+  const {isLoading} = useSelector(state => state.commonReducers);
 
   const onPressTerbit = value => {
     try {
@@ -22,20 +22,23 @@ const AddContact = ({navigation, route}) => {
       formData.append('firstName', value.firstName);
       formData.append('lastName', value.lastName);
       formData.append('age', value.age);
-      formData.append('photo', {
-        uri: image,
-        type: 'image/jpeg',
-        name: 'image.jpg',
-      });
-
-      setData(formData);
+      formData.append('photo', image);
       dispatch(addContact(formData, navigation));
+      console.log(image);
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log('Value: ', data);
+  const fromLibrary = () =>
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+      compressImageQuality: 0.7,
+    }).then(image => {
+      setAvatar(image.path);
+    });
 
   return (
     <>
@@ -83,7 +86,7 @@ const AddContact = ({navigation, route}) => {
                   <Upload
                     style={{marginTop: 10}}
                     source={image}
-                    onPress={() => thisRef.current.snapTo(0)}
+                    onPress={fromLibrary}
                     name="camera"
                   />
                 </View>
@@ -125,6 +128,7 @@ const AddContact = ({navigation, route}) => {
                     primary
                     type="createcontact"
                     title="Create"
+                    loading={isLoading}
                     disabled={!(dirty && isValid)}
                     onPress={handleSubmit}
                   />
