@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {memo} from 'react';
-import {ActivityIndicator, Text, View} from 'react-native';
-import {RectButton} from 'react-native-gesture-handler';
-import {COLORS, FONTS} from '../../../themes';
+import React, { memo } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
+import { COLORS, FONTS } from '../../../themes';
 import styles from './styles';
 
 function CustomButton({
@@ -50,7 +50,7 @@ function CustomButton({
       testID={testID}
       enabled={!disabled}
       onPress={onPress}
-      style={[styles.wrapper, {backgroundColor: getBgColor()}, style]}>
+      style={[styles.wrapper, { backgroundColor: getBgColor() }, style]}>
       <View style={[styles.loaderSection]}>
         {loading && (
           <ActivityIndicator color={primary ? COLORS.black : COLORS.primary} />

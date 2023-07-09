@@ -4,7 +4,6 @@ import {COLORS, RADIUS} from '../../../themes';
 export default StyleSheet.create({
   wrapper: {
     height: 45,
-
     paddingHorizontal: 5,
     borderColor: COLORS.black,
     marginVertical: 5,

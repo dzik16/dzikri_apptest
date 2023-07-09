@@ -1,19 +1,15 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
-import {COLORS, FONTS, SIZES} from '../../../themes';
+import { COLORS, FONTS, SIZES } from '../../../themes';
 import Icon from 'react-native-vector-icons/Feather';
+import IconBack from '../../../assets/icons/IconBack';
 
 const IconSize = 24;
-function BackTitle({title, onPress}) {
+function BackTitle({ title, onPress }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <Icon
-          name="arrow-left"
-          size={IconSize}
-          color={COLORS.black}
-          onPress={onPress}
-        />
+      <TouchableOpacity onPress={onPress}>
+        <IconBack />
       </TouchableOpacity>
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
@@ -41,5 +37,6 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     marginTop: 4,
     alignSelf: 'center',
+    fontWeight: 'bold'
   },
 });
