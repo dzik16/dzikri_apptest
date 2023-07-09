@@ -1,13 +1,7 @@
 import {FlatList, RefreshControl} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  addContact,
-  getContact,
-  getDetailDetailContact,
-  upDataProduct,
-  updateContact,
-} from '../../store/actions/contact';
+import {getContact} from '../../store/actions/contact';
 import {CustomHeader} from '../../components/atoms';
 import {CardFoto, EmptyState} from '../../components/molekules';
 import styles from './style';
@@ -15,7 +9,6 @@ import {EmptySearch} from '../../assets/image';
 
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
-  const {dataAddContact} = useSelector(state => state.addContactReducers);
   const {dataUpdateContact} = useSelector(state => state.updateContactReducers);
   const {dataContact, isLoading} = useSelector(
     state => state.getContactReducers,
@@ -25,23 +18,10 @@ const Home = ({navigation}) => {
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    // const formData = new FormData();
-
-    // formData.append('firstName', 'Joko');
-    // formData.append('lastName', 'Anwar');
-    // formData.append('age', 40);
-    // formData.append('photo', 'N/A');
-    // dispatch(addContact(formData));
-    // dispatch(updateContact('3d623fd0-1db1-11ee-9149-b7b09d51d714', formData));
-    dispatch(getDetailDetailContact('3d623fd0-1db1-11ee-9149-b7b09d51d714'));
     dispatch(getContact());
     setOnFocused('');
     setRefreshing(false);
   }, [dispatch, refreshing]);
-
-  // console.log('Update Contact : ', dataUpdateContact);
-  // console.log('Detail Contact : ', dataDetailContact.data);
-  // console.log('Contact : ', dataContact.data);
 
   const renderItem = useCallback(
     ({item}) => (
@@ -110,7 +90,6 @@ const Home = ({navigation}) => {
         }
       />
     </>
-    // </ScrollView>
   );
 };
 

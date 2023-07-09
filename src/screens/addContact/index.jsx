@@ -7,8 +7,12 @@ import {SIZES} from '../../themes';
 import {CustomButton, CustomInput} from '../../components/atoms';
 import styles from './styles';
 import Upload from '../../components/molekules/UploadFoto';
+import {useDispatch, useSelector} from 'react-redux';
+import {addContact} from '../../store/actions/contact';
 
 const AddContact = ({navigation, route}) => {
+  const dispatch = useDispatch();
+  const {dataAddContact} = useSelector(state => state.addContactReducers);
   const [image, setAvatar] = useState('-');
   const [data, setData] = useState();
 
@@ -25,7 +29,7 @@ const AddContact = ({navigation, route}) => {
       });
 
       setData(formData);
-      // dispatch(doProduct(formData, navigation));
+      dispatch(addContact(formData, navigation));
     } catch (error) {
       console.log(error);
     }

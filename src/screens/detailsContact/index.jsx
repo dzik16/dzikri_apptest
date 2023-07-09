@@ -43,6 +43,7 @@ const Details = ({navigation, route}) => {
               style={styles.imageContact}
               source={{
                 uri:
+                  !dataDetailContact.data.photo ||
                   dataDetailContact.data.photo !== 'N/A'
                     ? dataDetailContact.data.photo
                     : `https://ui-avatars.com/api/?name=${dataDetailContact.data.firstName}&background=01A0C7&color=fff`,
