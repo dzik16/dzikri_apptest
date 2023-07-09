@@ -5,7 +5,6 @@ import {
   DELETE_CONTACT_SUCCESS,
   DELETE_CONTACT_FAILED
 } from "../../types";
-import axios from "axios";
 
 export const deleteContactSuccess = (data) => ({
   type: DELETE_CONTACT_SUCCESS,
@@ -18,7 +17,6 @@ export const deleteContactFailed = (error) => ({
 });
 
 export const deleteContact = (id) => async (dispatch) => {
-  console.log("idddddd: ", id);
   await deleteContactApi(id)
     .then((response) => {
       dispatch(deleteContactSuccess(response.data));

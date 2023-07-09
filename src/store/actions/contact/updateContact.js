@@ -14,18 +14,15 @@ export const failedUpdateContact = () => ({
 });
 
 export const updateContact = (id, payload) => async dispatch => {
-  // dispatch(setLoading(true));
   await updateContactApi(id, payload)
     .then(res => {
       dispatch(successUpdateContact(res));
-      // dispatch(setLoading(false));
       dispatch(getDetailDetailContact(id));
-      // navigation.goBack();
       showSuccess('Update Contact Success');
     })
     .catch(err => {
       dispatch(failedUpdateContact());
-      // dispatch(setLoading(false));
       showError("Update Contact Error");
+      console.log(err);
     });
 };

@@ -8,7 +8,11 @@ import {CustomButton, CustomInput} from '../../components/atoms';
 import styles from './styles';
 import Upload from '../../components/molekules/UploadFoto';
 import {useDispatch, useSelector} from 'react-redux';
-import {addContact, getDetailDetailContact} from '../../store/actions/contact';
+import {
+  addContact,
+  getDetailDetailContact,
+  updateContact,
+} from '../../store/actions/contact';
 
 const UpdateContact = ({navigation, route}) => {
   const {id} = route.params;
@@ -17,7 +21,9 @@ const UpdateContact = ({navigation, route}) => {
   const {dataDetailContact} = useSelector(
     state => state.getDetailContactReducers,
   );
-  const [image, setAvatar] = useState(dataDetailContact.data.photo);
+  const [image, setAvatar] = useState(
+    dataDetailContact.data.photo !== 'N/A' ? dataDetailContact.data.photo : '-',
+  );
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -30,14 +36,12 @@ const UpdateContact = ({navigation, route}) => {
       formData.append('firstName', value.firstName);
       formData.append('lastName', value.lastName);
       formData.append('age', value.age);
-      formData.append('photo', {
-        uri: image,
-        type: 'image/jpeg',
-        name: 'image.jpg',
-      });
+      formData.append('photo', image);
+
+      console.log('dataaa :', formData);
 
       setData(formData);
-      dispatch(addContact(formData, navigation));
+      dispatch(updateContact(id, formData));
     } catch (error) {
       console.log(error);
     }
