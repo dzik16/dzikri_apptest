@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../../../themes';
 
 export default StyleSheet.create({
   modalContainer: {
@@ -18,6 +19,7 @@ export default StyleSheet.create({
     fontSize: 18,
     marginBottom: 20,
     textAlign: 'center',
+    color: COLORS.black
   },
   buttonContainer: {
     flexDirection: 'row',

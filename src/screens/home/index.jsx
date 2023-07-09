@@ -1,11 +1,4 @@
-import {
-  FlatList,
-  Modal,
-  RefreshControl,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, RefreshControl} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {deleteContact, getContact} from '../../store/actions/contact';
@@ -20,10 +13,8 @@ import {EmptySearch} from '../../assets/image';
 
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
-  const {dataUpdateContact} = useSelector(state => state.updateContactReducers);
-  const {dataContact, isLoading} = useSelector(
-    state => state.getContactReducers,
-  );
+  const {isLoading} = useSelector(state => state.commonReducers);
+  const {dataContact} = useSelector(state => state.getContactReducers);
   const [onFocused, setOnFocused] = useState();
   const [refreshing, setRefreshing] = useState(false);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -31,13 +22,8 @@ const Home = ({navigation}) => {
   const [id, setId] = useState('');
 
   const handleDelete = () => {
-    console.log('idddd :', id);
-    // if (id) {
     dispatch(deleteContact(id));
     setModalVisible(false);
-    setRefreshing(true);
-    setRefreshing(false);
-    // }
   };
 
   const handleCancel = () => {
@@ -78,7 +64,7 @@ const Home = ({navigation}) => {
         isFocused={onFocused === item.id ? true : false}
       />
     ),
-    [onFocused, setOnFocused, setRefreshing], // Menambahkan onFocused, setOnFocused, setRefreshing, dan navigation ke dalam dependencies useCallback
+    [onFocused, setOnFocused, setRefreshing],
   );
 
   const keyExtractor = useCallback(item => item.id.toString(), []);

@@ -12,22 +12,20 @@ export const setAddContactFailed = () => ({
   type: ADD_CONTACT_FAILED,
 });
 
-export const addContact = (payload) => async dispatch => {
+export const addContact = (payload, navigation) => async dispatch => {
   console.log('Kirim Data Contact', payload);
   dispatch(setLoading(true));
-  await addContactApi(payload)
-    .then(res => {
-      dispatch(setAddContactSuccess(res.data));
-      // console.log("HAHAA ", es);
-      dispatch(setLoading(false));
-      showSuccess('Tambah Contact Success');
-      // navigation.navigate('Home');
-      console.log('ADD CONTACT', res);
-    })
-    .catch(err => {
-      dispatch(setAddContactFailed());
-      dispatch(setLoading(false));
-      // showError(err.response.message);
-      console.log('ADD PRODUK FAILED', err);
-    });
+  try {
+    const res = await addContactApi(payload)
+    dispatch(setAddContactSuccess(res.data));
+    dispatch(setLoading(false));
+    showSuccess('Tambah Contact Success');
+    navigation.goBack();
+    console.log('ADD CONTACT', res);
+  } catch (err) {
+    dispatch(setAddContactFailed());
+    dispatch(setLoading(false));
+    navigation.goBack();
+    showError("Create Contact Failed");
+  }
 };

@@ -3,18 +3,13 @@ import { getDetailContactApi } from "../../../services/api/contact";
 import {
   GET_DETAIL_CONTACT_SUCCESS,
   GET_DETAIL_CONTACT_FAILED,
-  CONTACT_LOADING,
 } from "../../types";
+import { setLoading } from "../common";
 
 export const setDetailContactSuccess = data => ({
   type: GET_DETAIL_CONTACT_SUCCESS,
   payload: data,
 });
-
-export const setDetailContactLoading = loading => ({
-  type: CONTACT_LOADING,
-  payload: loading
-})
 
 export const setDetailContactFailed = error => ({
   type: GET_DETAIL_CONTACT_FAILED,
@@ -22,16 +17,14 @@ export const setDetailContactFailed = error => ({
 });
 
 export const getDetailDetailContact = (id) => async dispatch => {
-  // dispatch(setDetailContactLoading(true));
-  await getDetailContactApi(id)
-    .then(res => {
-      dispatch(setDetailContactSuccess(res.data));
-      console.log("jjjjjj", res.data);
-      dispatch(setDetailContactLoading(false));
-    })
-    .catch(err => {
-      dispatch(setDetailContactFailed(err.response.message));
-      dispatch(setDetailContactLoading(false));
-      showError("err.response.message");
-    });
+  dispatch(setLoading(true))
+  try {
+    const res = await getDetailContactApi(id)
+    dispatch(setDetailContactSuccess(res.data));
+    dispatch(setLoading(false))
+  } catch (err) {
+    dispatch(setDetailContactFailed(err.message));
+    dispatch(setLoading(false))
+    showError("Get Detail Failed");
+  }
 };

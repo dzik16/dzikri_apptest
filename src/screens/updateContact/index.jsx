@@ -17,7 +17,7 @@ import {
 const UpdateContact = ({navigation, route}) => {
   const {id} = route.params;
   const dispatch = useDispatch();
-  const {dataAddContact} = useSelector(state => state.addContactReducers);
+  const {isLoading} = useSelector(state => state.commonReducers);
   const {dataDetailContact} = useSelector(
     state => state.getDetailContactReducers,
   );
@@ -28,7 +28,7 @@ const UpdateContact = ({navigation, route}) => {
 
   useEffect(() => {
     dispatch(getDetailDetailContact(id));
-  }, []);
+  }, [dispatch]);
 
   const onPressTerbit = value => {
     try {
@@ -37,13 +37,10 @@ const UpdateContact = ({navigation, route}) => {
       formData.append('lastName', value.lastName);
       formData.append('age', value.age);
       formData.append('photo', image);
-
-      console.log('dataaa :', formData);
-
       setData(formData);
-      dispatch(updateContact(id, formData));
+      dispatch(updateContact(id, formData, navigation));
     } catch (error) {
-      console.log(error);
+      showError('Update Contact Gagal');
     }
   };
 
@@ -135,6 +132,7 @@ const UpdateContact = ({navigation, route}) => {
                     primary
                     type="updatecontact"
                     title="Update"
+                    loading={isLoading}
                     disabled={!(dirty && isValid)}
                     onPress={handleSubmit}
                   />

@@ -6,13 +6,15 @@ import {
   updateContactReducers,
   deleteContactReducers
 } from './contact';
+import { commonReducers } from './common';
 
 const reducer = combineReducers({
   getContactReducers,
   getDetailContactReducers,
   addContactReducers,
   updateContactReducers,
-  deleteContactReducers
+  deleteContactReducers,
+  commonReducers
 });
 
 export default reducer;

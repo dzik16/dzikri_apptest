@@ -13,16 +13,22 @@ export const failedUpdateContact = () => ({
   type: UPDATE_CONTACT_FAILED,
 });
 
-export const updateContact = (id, payload) => async dispatch => {
-  await updateContactApi(id, payload)
-    .then(res => {
-      dispatch(successUpdateContact(res));
-      dispatch(getDetailDetailContact(id));
-      showSuccess('Update Contact Success');
-    })
-    .catch(err => {
-      dispatch(failedUpdateContact());
-      showError("Update Contact Error");
-      console.log(err);
-    });
+export const updateContact = (id, payload, navigation) => async dispatch => {
+  console.log("payy : ", payload);
+  dispatch(setLoading(true));
+  try {
+    const res = await updateContactApi(id, payload)
+    dispatch(successUpdateContact(res.data));
+    dispatch(getDetailDetailContact(id));
+    showSuccess('Update Contact Success');
+    dispatch(setLoading(false));
+    navigation.goBack();
+    console.log(res);
+  } catch (err) {
+    dispatch(failedUpdateContact());
+    showError("Update Contact Error");
+    dispatch(setLoading(false));
+    navigation.goBack();
+    console.log(err);
+  }
 };

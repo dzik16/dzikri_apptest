@@ -17,12 +17,15 @@ export const deleteContactFailed = (error) => ({
 });
 
 export const deleteContact = (id) => async (dispatch) => {
-  await deleteContactApi(id)
-    .then((response) => {
-      dispatch(deleteContactSuccess(response.data));
-      showSuccess('Home');
-    }).catch(err => {
-      dispatch(deleteContactFailed(err.message));
-      showError("Delete failed");
-    });
+  dispatch(setLoading(true));
+  try {
+    const ress = await deleteContactApi(id)
+    dispatch(deleteContactSuccess(response.data));
+    dispatch(setLoading(false));
+    showSuccess('Delete Success');
+  } catch (err) {
+    dispatch(deleteContactFailed(err.message));
+    dispatch(setLoading(false));
+    showError("Delete failed");
+  }
 };
